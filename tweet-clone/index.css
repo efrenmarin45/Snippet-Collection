@@ -2,6 +2,8 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
+    /* position: relative;
+    min-height: 100vh; */
 }
 
 /* typography and icons */
@@ -33,7 +35,7 @@ i{
 /* layout */
 
 main, header{
-    width: 290px;
+    width: 310px;
     margin: 0 auto;
 }
 
@@ -72,7 +74,7 @@ button{
     font-weight: 600;
 }
 
-/* tweet */
+/* Boops */
 
 .boop{
     border-top: 1px solid lightgray;
@@ -114,7 +116,7 @@ button{
 }
 
 .boop-text{
-    width: 207px;
+    width: 217px;
     font-size: 14px;
     line-height: 20px;
 }
@@ -133,8 +135,12 @@ button{
 }
 
 #attributes {
+    border-top: solid 2px dodgerblue;
+    width: 100%;
+    height: 3rem;
+    background-color: azure;
     font-size: small;
-    position: fixed;
-    margin: 0 0 15 15;
-    bottom: 0px;
+    margin: auto;
+    padding-left: 3%;
+    padding-top: 1%;
 }
