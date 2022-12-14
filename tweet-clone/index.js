@@ -1,9 +1,12 @@
+//* Data Source
 import { boopData } from "./data.js";
 
+//* Variables - DOM elements
 const boopInput = document.getElementById("boop-input");
 const boopBtn = document.getElementById("boop-btn");
 const boopFeed = document.getElementById("feed");
 
+//* Document Event Listener 
 document.addEventListener("click", (e) => {
     let dataReplies = e.target.dataset.boopReplies;
     let dataLikes = e.target.dataset.boopLikes;
@@ -18,15 +21,43 @@ document.addEventListener("click", (e) => {
     }
 });
 
+//* Checking to see if the data attribute matches the UUID of any object within the data source. Since there is only one UUID per user, we default to zero index and icrement by 1. 
 const handleLikeClick = (boopID) => {
-    console.log(boopID)
-};
+    const targetBoopObj = boopData.filter((props) => {
+        return props.uuid === boopID;
+    })[0];
 
-const handleReplyClick = (boopID) => {
-    console.log(boopID)
+    // Checks to see if post has been liked already
+    if(targetBoopObj.isLiked){
+        targetBoopObj.likes--;
+    } else{
+        targetBoopObj.likes++;
+    }
+
+    // Toggles isLiked between true and false
+    targetBoopObj.isLiked = !targetBoopObj.isLiked
+
+    // Renders changes to the view
+    render();
 };
 
 const handleReboopClick = (boopID) => {
+    const targetBoopObj = boopData.filter((props) => {
+        return props.uuid === boopID;
+    })[0];
+
+    if(targetBoopObj.isBooped){
+        targetBoopObj.reBoop--;
+    } else{
+        targetBoopObj.reBoop++;
+    };
+
+    targetBoopObj.isBooped = !targetBoopObj.isBooped;
+
+    render();
+};
+
+const handleReplyClick = (boopID) => {
     console.log(boopID)
 };
 
