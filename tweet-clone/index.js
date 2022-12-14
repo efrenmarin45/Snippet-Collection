@@ -64,6 +64,16 @@ const handleReplyClick = (boopID) => {
 const getFeedHTML = () => {
 	let feedHTML = ``;
 	boopData.forEach((boops) => {
+        let likeIcon = '';
+        let shareIcon = '';
+
+        if (boops.isLiked){
+            likeIcon = 'liked'
+        }
+        if (boops.isBooped){
+            shareIcon = 'reBoop'
+        };
+
 		feedHTML += `<div class="boop">
                     <div class="boop-inner">
                         <img src="${boops.profilePic}" class="profile-pic">
@@ -76,11 +86,11 @@ const getFeedHTML = () => {
                                     ${boops.replies.length}
                                 </span>
                                 <span class="boop-detail">
-                                <i class="fa-solid fa-heart" data-boop-likes="${boops.uuid}"></i>
+                                <i class="fa-solid fa-heart ${likeIcon}" data-boop-likes="${boops.uuid}"></i>
                                     ${boops.likes}
                                 </span>
                                 <span class="boop-detail">
-                                <i class="fa-solid fa-retweet" data-boop-reboops="${boops.uuid}"></i>
+                                <i class="fa-solid fa-retweet ${shareIcon}" data-boop-reboops="${boops.uuid}"></i>
                                     ${boops.reBoop}
                                 </span>
                             </div>   
