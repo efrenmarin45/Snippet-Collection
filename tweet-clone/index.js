@@ -94,16 +94,18 @@ const handleDeleteClick = (boopID) => {
 	})[0];
 	
 	if(targetBoopObj.handle === "@PlayerOne"){
-		console.log("boopData", boopData);
-		console.log("target", targetBoopObj.uuid);
+		boopData.splice(boopData.findIndex(function(i){
+			return i.uuid === targetBoopObj.uuid;
+		}), 1);
 	}
-
+	
 	render();
 };
 
 //* Displays the feed of boops
 const getFeedHTML = () => {
 	let feedHTML = ``;
+
 	boopData.forEach((boops) => {
 		let likeIcon = "";
 		let shareIcon = "";
