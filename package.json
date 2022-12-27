@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/efrenmarin45/Snippet-Collection/issues"
   },
-  "homepage": "https://github.com/efrenmarin45/Snippet-Collection#readme"
+  "homepage": "https://github.com/efrenmarin45/Snippet-Collection#readme",
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
 }
