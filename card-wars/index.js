@@ -17,9 +17,11 @@ const handleDrawCardClick = () => {
 	.then(response => response.json())
 	.then(data => {
 		console.log(data.cards);
-		cardArea.innerHTML = `
-			<img src=${data.cards[0].image} />
-			<img src=${data.cards[1].image} />
+		cardArea.children[0].innerHTML = `
+			<img src=${data.cards[0].image} class="card" />
+		`
+		cardArea.children[1].innerHTML = `
+		<img src=${data.cards[1].image} class="card" />
 		`
 	})
 }
