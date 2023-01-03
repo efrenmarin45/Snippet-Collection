@@ -31,12 +31,42 @@ button {
 	font-family: "Russo One", sans-serif;
 }
 
+.top-area{
+    display: flex;
+    align-self: flex-start;
+}
+
+.top-area > p {
+    margin-left: 10px;
+    align-self: center;
+}
+
 #new-deck {
 	align-self: flex-start;
 }
 
+#new-deck:hover {
+	background-color: #db0320;
+}
+
 #draw-card {
 	align-self: stretch;
+}
+
+#draw-card:hover {
+	background-color: #db0320;
+}
+
+#cards-remaining {
+	color: whitesmoke;
+	font-size: 1.5em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#game-message {
+	font-size: 3.5em;
+	color: whitesmoke;
+	font-family: "Russo One", sans-serif;
 }
 
 .card-outline {
@@ -62,65 +92,129 @@ button {
 	width: 100%;
 }
 
-/** Animation **/
+button:disabled {
+    cursor: not-allowed;
+}
+
+/** Animations **/
+/* Card Outline Text */
 .shimmer {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.1);
-    background: -webkit-gradient(linear, left top, right top, from(gold), color-stop(0.5, #fff));
-    background: -moz-gradient(linear, left top, right top, from(gold), color-stop(0.5, #fff));
-    background: gradient(linear, left top, right top, from(gold), color-stop(0.5, #fff));
-    -webkit-background-size: 125px 100%;
-    -moz-background-size: 125px 100%;
-    background-size: 55px 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    -webkit-animation-name: shimmer;
-    -moz-animation-name: shimmer;
-    animation-name: shimmer;
-    -webkit-animation-duration: 2s;
-    -moz-animation-duration: 2s;
-    animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-color: gold;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.1);
+	background: -webkit-gradient(
+		linear,
+		left top,
+		right top,
+		from(gold),
+		color-stop(0.5, #fff)
+	);
+	background: -moz-gradient(
+		linear,
+		left top,
+		right top,
+		from(gold),
+		color-stop(0.5, #fff)
+	);
+	background: gradient(
+		linear,
+		left top,
+		right top,
+		from(gold),
+		color-stop(0.5, #fff)
+	);
+	-webkit-background-size: 125px 100%;
+	-moz-background-size: 125px 100%;
+	background-size: 55px 100%;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+	-webkit-animation-name: shimmer;
+	-moz-animation-name: shimmer;
+	animation-name: shimmer;
+	-webkit-animation-duration: 2s;
+	-moz-animation-duration: 2s;
+	animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-color: gold;
 }
 
 @-moz-keyframes shimmer {
-    0% {
-            background-position: top left;
-    }
-    100% {
-            background-position: top right;
-    }
+	0% {
+		background-position: top left;
+	}
+	100% {
+		background-position: top right;
+	}
 }
 
 @-webkit-keyframes shimmer {
-    0% {
-            background-position: top left;
-    }
-    100% {
-            background-position: top right;
-    }
+	0% {
+		background-position: top left;
+	}
+	100% {
+		background-position: top right;
+	}
 }
 
 @-o-keyframes shimmer {
-    0% {
-            background-position: top left;
-    }
-    100% {
-            background-position: top right;
-    }
+	0% {
+		background-position: top left;
+	}
+	100% {
+		background-position: top right;
+	}
 }
 
 @keyframes shimmer {
-    0% {
-            background-position: top left;
-    }
-    100% {
-            background-position: top right;
-    }
+	0% {
+		background-position: top left;
+	}
+	100% {
+		background-position: top right;
+	}
+}
+
+/* Generate A New Deck / Draw A Card */
+.breathe {
+	-webkit-animation-name: start; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
+	animation-name: breathe;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes breathe {
+	0% {
+		background-color: #930014;
+	}
+	25% {
+		background-color: #930014;
+	}
+	50% {
+		background-color: #db0320;
+	}
+	100% {
+		background-color: #930014;
+	}
+}
+
+/* Standard syntax */
+@keyframes breathe {
+	0% {
+		background-color: #930014;
+	}
+	25% {
+		background-color: #930014;
+	}
+	50% {
+		background-color: #db0320;
+	}
+	100% {
+		background-color: #930014;
+	}
 }
