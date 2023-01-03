@@ -4,7 +4,7 @@ let houseCard;
 let playerCard;
 let gameMessage;
 let playerPoints = 0;
-let housePoints= 0;
+let housePoints = 0;
 const cardArea = document.getElementById("card-container");
 const newDeck = document.getElementById("new-deck");
 const drawCard = document.getElementById("draw-card");
@@ -12,6 +12,9 @@ const messageArea = document.getElementById("game-message");
 const cardsLeft = document.getElementById("cards-remaining");
 const playerScore = document.getElementById("playerPoints");
 const houseScore = document.getElementById("housePoints");
+const openModal = document.getElementById("openModal");
+const modal = document.querySelector(".modal");
+const closeModal = document.getElementById("modal-exit");
 
 //* API Calls
 const handleNewDeckClick = () => {
@@ -44,7 +47,7 @@ const handleDrawCardClick = () => {
 			cardArea.children[1].innerHTML = `
 		<img src=${data.cards[1].image} class="card" />
 		`;
-			cardCompare(houseCard, playerCard);
+			cardCompare(houseCard, playerCard, data);
 
 			messageArea.textContent = gameMessage;
 			cardsLeft.textContent = `Cards Left: ${data.remaining}`;
@@ -52,13 +55,13 @@ const handleDrawCardClick = () => {
 			disableDrawCardBtn(data);
 		});
 
-		setTimeout(() => {
-			scoreKeeper();
-		}, 500);
+	setTimeout(() => {
+		scoreKeeper();
+	}, 500);
 };
 
 //* Compare Drawn Cards
-const cardCompare = (cardOne, cardTwo) => {
+const cardCompare = (cardOne, cardTwo, cardsLeft) => {
 	const cardValueOptions = [
 		"2",
 		"3",
@@ -79,22 +82,31 @@ const cardCompare = (cardOne, cardTwo) => {
 	const cardTwoValueIndex = cardValueOptions.indexOf(cardTwo);
 
 	if (cardOneValueIndex > cardTwoValueIndex) {
-		gameMessage = "House card wins!";
+		gameMessage = "House Card Wins";
 		housePoints += 1;
 	} else if (cardOneValueIndex < cardTwoValueIndex) {
-		gameMessage = "Player card wins!";
+		gameMessage = "Player Card Wins";
 		playerPoints += 1;
 	} else {
 		gameMessage = "It's a tie!";
 	}
 
+	if (cardsLeft.remaining === 0) {
+		if (housePoints > playerPoints) {
+			gameMessage = "The House Won The War!";
+		} else if (housePoints < playerPoints) {
+			gameMessage = "You Beat The House!";
+		} else if (housePoints === playerPoints) {
+			gameMessage = "You Tied With The House!";
+		}
+	}
 };
 
 //* Displays Score
 const scoreKeeper = () => {
-	houseScore.textContent = `House Score: ${housePoints}`
-	playerScore.textContent = `Player Score: ${playerPoints}`
-}
+	houseScore.textContent = `House Score: ${housePoints}`;
+	playerScore.textContent = `Player Score: ${playerPoints}`;
+};
 
 //* Disables Draw Card Button
 const disableDrawCardBtn = (cards) => {
@@ -102,15 +114,24 @@ const disableDrawCardBtn = (cards) => {
 		drawCard.disabled = true;
 		drawCard.classList.add("disabled");
 		drawCard.classList.remove("breathe");
-		newDeck.classList.add('breathe');
-	} else if (cards.remaining === 52){
+		newDeck.classList.add("breathe");
+	} else if (cards.remaining === 52) {
 		drawCard.disabled = false;
 		drawCard.classList.remove("disabled");
 		drawCard.classList.add("breathe");
-		newDeck.classList.remove('breathe');
+		newDeck.classList.remove("breathe");
 	}
 };
 
 //* Event Listeners
 newDeck.addEventListener("click", handleNewDeckClick);
 drawCard.addEventListener("click", handleDrawCardClick);
+
+//* Modal - Event Listeners
+openModal.addEventListener("click", () => {
+	modal.style.display = "block";
+});
+
+closeModal.addEventListener("click", () => {
+	modal.style.display = "none";
+});

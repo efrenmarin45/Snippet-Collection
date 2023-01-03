@@ -1,1 +1,2 @@
-# Card Wars!
+# Cards of War! 
+## ⚔️
