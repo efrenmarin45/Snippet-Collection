@@ -3,11 +3,15 @@ let deckID;
 let houseCard;
 let playerCard;
 let gameMessage;
+let playerPoints = 0;
+let housePoints= 0;
 const cardArea = document.getElementById("card-container");
 const newDeck = document.getElementById("new-deck");
 const drawCard = document.getElementById("draw-card");
 const messageArea = document.getElementById("game-message");
 const cardsLeft = document.getElementById("cards-remaining");
+const playerScore = document.getElementById("playerPoints");
+const houseScore = document.getElementById("housePoints");
 
 //* API Calls
 const handleNewDeckClick = () => {
@@ -22,6 +26,9 @@ const handleNewDeckClick = () => {
 	newDeck.textContent = "Reset Your Deck";
 	newDeck.classList.remove("breathe");
 	drawCard.classList.add("breathe");
+
+	playerPoints = 0;
+	housePoints = 0;
 };
 
 const handleDrawCardClick = () => {
@@ -44,6 +51,10 @@ const handleDrawCardClick = () => {
 
 			disableDrawCardBtn(data);
 		});
+
+		setTimeout(() => {
+			scoreKeeper();
+		}, 500);
 };
 
 //* Compare Drawn Cards
@@ -68,13 +79,22 @@ const cardCompare = (cardOne, cardTwo) => {
 	const cardTwoValueIndex = cardValueOptions.indexOf(cardTwo);
 
 	if (cardOneValueIndex > cardTwoValueIndex) {
-		return (gameMessage = "House card wins!");
+		gameMessage = "House card wins!";
+		housePoints += 1;
 	} else if (cardOneValueIndex < cardTwoValueIndex) {
-		return (gameMessage = "Player card wins!");
+		gameMessage = "Player card wins!";
+		playerPoints += 1;
 	} else {
 		gameMessage = "It's a tie!";
 	}
+
 };
+
+//* Displays Score
+const scoreKeeper = () => {
+	houseScore.textContent = `House Score: ${housePoints}`
+	playerScore.textContent = `Player Score: ${playerPoints}`
+}
 
 //* Disables Draw Card Button
 const disableDrawCardBtn = (cards) => {
